@@ -1,18 +1,37 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Login from '../pages/auth/Login'
+import React from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Login from "../pages/auth/Login";
+import { AuthProviders } from "../contexts/AuthProviders";
+import AuthRouter from "./AuthRouter";
+import UserRoute from "./UserRoutes";
 
 const AppRouter = () => {
+  const user = JSON.parse(localStorage.getItem("user")); // ← corregido
+  const isAuthenticated = !!(user && user.token);
+
   return (
     <BrowserRouter>
-    <Routes>
-    <Route index element={<Login></Login>}/>
-    </Routes>
+      <AuthProviders>
+        <Routes>
+          {/* Si NO está autenticado, mostrar rutas de login */}
+          {!isAuthenticated && (
+            <>
+              <Route path="/auth/*" element={<AuthRouter />} />
+              <Route path="*" element={<Navigate to="/auth/login" />} />
+            </>
+          )}
 
-    
-    
+          {/* Si SÍ está autenticado, mostrar rutas privadas */}
+          {isAuthenticated && (
+            <>
+              <Route path="/user/*" element={<UserRoute />} />
+              <Route path="*" element={<Navigate to="/user" />} />
+            </>
+          )}
+        </Routes>
+      </AuthProviders>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default AppRouter
+export default AppRouter;
