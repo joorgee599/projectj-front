@@ -10,11 +10,16 @@ const useForm = (incialState = {}) => {
     });
   };
 
+ const setFormValues = (values) => {
+  setValue(values);
+    
+  }
+
   const resetForm = () => {
     setValue(incialState);
   };
 
-  return { value, handleChange,resetForm};
+  return { value, handleChange,resetForm,setFormValues };
 };
 
 export default useForm;

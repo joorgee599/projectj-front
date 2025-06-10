@@ -64,6 +64,28 @@ export class ApiBaseEndpoint {
     }
   }
 
+  async put(endpoint, data = {}, headers = {}) {  
+    const url = `${this.baseURL}${endpoint}`;
+
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: this.buildHeaders(headers),
+        body: JSON.stringify(data),
+      });
+
+    //  return await this.handleResponse(response);
+     const json = await response.json();
+      return json;
+    } catch (error) {
+      return {
+        status: 500,
+        message: "Error de red",
+        error: error.message,
+      };
+    }
+  }
+
   async handleResponse(response) {
     if (response.status === 401) {
       Swal.fire({
