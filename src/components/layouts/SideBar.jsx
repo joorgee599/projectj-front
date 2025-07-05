@@ -5,6 +5,7 @@ import {
   FaCertificate,
   FaHome,
   FaProductHunt,
+  FaSalesforce,
   FaThLarge,
   FaUserAlt,
 } from "react-icons/fa";
@@ -67,11 +68,11 @@ const SideBar = ({ isOpen, setIsOpen }) => {
             </span>
             <p className="mt-3">Productos</p>
           </Link>
-          <Link className="sidebar-button-principal" to="/user">
+          <Link className="sidebar-button-principal" to="/cart/cart">
             <span className="">
-              <FaCertificate></FaCertificate>
+              <FaSalesforce></FaSalesforce>
             </span>
-            <p className="mt-3">Campo extra</p>
+            <p className="mt-3">Carrito de compras</p>
           </Link>
 
           <button className="sidebar-button-principal" onClick={handleLogout}>

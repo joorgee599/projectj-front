@@ -5,6 +5,7 @@ import { AuthProviders } from "../contexts/AuthProviders";
 import AuthRouter from "./AuthRouter";
 import UserRoute from "./UserRoutes";
 import ProductRouter from "./ProductRouter";
+import CartRouter from "./CartRouter";
 
 const AppRouter = () => {
   const user = JSON.parse(localStorage.getItem("user")); // ← corregido
@@ -28,6 +29,7 @@ const AppRouter = () => {
             <>
               <Route path="/user/*" element={<UserRoute />} />
               <Route path="/product/*" element={<ProductRouter/>} />
+              <Route path="/cart/*" element={<CartRouter/>} />
               
               <Route path="*" element={<Navigate to="/user" />} />
             </>
